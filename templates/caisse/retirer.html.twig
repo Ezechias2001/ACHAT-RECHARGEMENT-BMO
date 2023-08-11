@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Retirer de la caisse {% endblock %}
+
+{% block body %}
+      {% include '__fragments/nav.html.twig' %}
+      {# contenu #}
+      <div class="content">
+        <div class="pb-5">
+          <div class="row g-4">
+            <div class="col-12 col-xxl-6">
+                <div class="mb-8">                    
+                    <h1>Déposer un montant dans la caisse </h1>                    
+                    {{ form_start(form) }}
+                      {{ form_row(form.montant) }}
+                      <button type="submit" class="btn mt-3 mb-3 btn-danger">Retirer</button>
+                    {{ form_end(form) }}
+                </div> 
+            </div>
+           </div>
+        </div>
+    </div>
+
+{% endblock %}

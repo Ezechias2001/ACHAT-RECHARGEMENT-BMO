@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique Commission{% endblock %}
+
+{% block body %}
+      {% include '__fragments/nav.html.twig' %}
+      
+      {# contenu #}
+      
+      <div class="content">
+        <div class="mb-9">
+          <div class="row g-3 mb-4">
+            <div class="col-auto">
+              <h2 class="mb-0">Historique des Commissions</h2>
+            </div>
+          </div>
+          <div class="pb-2">
+          <div class="px-3 mb-2">
+            <div class="row justify-content-between">
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end border-bottom pb-4 pb-xxl-0 "><span class="uil fs-3 lh-1 uil-archway text-info"></span>
+                <h1 class="fs-3 pt-3"> {{ montantTotal|number_format(3, '.', ',')|trim('0', 'right')|slice(0, -1) }}  </h1>
+                <p class="fs--1 mb-0">Total des operations</p>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end-md border-bottom pb-4 pb-xxl-0"><span class="uil fs-3 lh-1 uil-chart-down text-success"></span>
+                <h1 class="fs-3 pt-3"> {{ brut|number_format(3, '.', ',')|trim('0', 'right')|slice(0, -1) }}  </h1>
+                <p class="fs--1 mb-0">Total brut </p>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-bottom-xxl-0 border-bottom border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0"><span class="uil fs-3 lh-1 uil-arrow-growth text-danger"></span>
+                <h1 class="fs-3 pt-3"> {{ soldeCommission|number_format(3, '.', ',')|trim('0', 'right')|slice(0, -1) }}  </h1>
+                <p class="fs--1 mb-0">Commission | Bénéfices</p>
+              </div>
+            </div>
+          </div>
+        </div>
+          <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><span>Total </span><span class="text-700 fw-semi-bold">(68817)</span></a></li>
+            <li class="nav-item"><a class="nav-link text-success" href="#"><span>Retrait </span><span class="text-700 fw-semi-bold">(6)</span></a></li>
+            <li class="nav-item"><a class="nav-link text-success" href="#"><span>Dépôt </span><span class="text-700 fw-semi-bold">(17)</span></a></li>
+          </ul>
+          <div id="orderTable" data-list='{"valueNames":["order","total","customer","payment_status","fulfilment_status","delivery_type","date"],"page":10,"pagination":true}'>
+            <div class="mb-4">
+              <div class="row g-3">
+                <div class="col-auto">
+                  <div class="search-box">
+                    <form class="position-relative" data-bs-toggle="search" data-bs-display="static"><input class="form-control search-input search" type="search" placeholder="Search orders" aria-label="Search" />
+                      <span class="fas fa-search search-box-icon"></span>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-auto scrollbar overflow-hidden-y flex-grow-1">
+                  {# <div class="btn-group position-static" role="group">
+                    <div class="btn-group position-static text-nowrap" role="group"><button class="btn btn-phoenix-secondary px-7 flex-shrink-0" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"> Payment status<span class="fas fa-angle-down ms-2"></span></button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                          <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                    <div class="btn-group position-static text-nowrap" role="group"><button class="btn btn-sm btn-phoenix-secondary px-7 flex-shrink-0" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"> Fulfilment status<span class="fas fa-angle-down ms-2"></span></button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                          <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                      </ul>
+                    </div><button class="btn btn-sm btn-phoenix-secondary px-7 flex-shrink-0">More filters </button>
+                  </div> #}
+                </div>
+                <div class="col-auto">
+                  <a href="{{path('app_excel_historique_commission_index')}}" class="btn btn-link text-900 me-4 px-0">
+                    <span class="fa-solid fa-file-export fs--1 me-2"></span>Exporter
+                  </a>
+                  <a href="{{ path('app_b_m_o_new') }}" class="btn btn-success">
+                    <span class="fas fa-plus me-2"></span>Ajouter un enregistrement
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
+              <div class="table-responsive scrollbar mx-n1 px-1">
+
+                <table id="myTable" class="table fs--1 mb-0">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Operation</th>
+                <th>Nom</th>
+                <th>TypeCarte</th>
+                <th>Montant</th>
+                <th>Gain Commission</th>
+                <th>Date</th>
+                {# <th>Actions</th> #}
+            </tr>
+        </thead>
+        <tbody>
+        {% for historique_commission in historique_commissions %}
+        {% set i = loop.index %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>{{ historique_commission.operation }}</td>
+                <td>{{ historique_commission.nom }}</td>
+                <td>
+                                {% if historique_commission.typeCarte == 'LOW'  %}
+                                    <span class="badge badge-phoenix fs--2 badge-phoenix-success">   
+                                        <span class="badge-label">{{ historique_commission.typeCarte }}</span>      <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check ms-1" style="height:12.8px;width:12.8px;"><polyline points="20 6 9 17 4 12"></polyline>      </svg>    
+                                    </span>
+                                    {% elseif historique_commission.typeCarte == 'MID' %}
+                                        <span class="badge badge-phoenix fs--2 badge-phoenix-warning">   
+                                            <span class="badge-label">{{ historique_commission.typeCarte }}</span>      <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check ms-1" style="height:12.8px;width:12.8px;"><polyline points="20 6 9 17 4 12"></polyline>      </svg>    
+                                        </span>                                    
+                                    {% elseif historique_commission.typeCarte == 'HIGH' %}
+                                        <span class="badge badge-phoenix fs--2 badge-phoenix-danger">   
+                                            <span class="badge-label">{{ historique_commission.typeCarte }}</span>      <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check ms-1" style="height:12.8px;width:12.8px;"><polyline points="20 6 9 17 4 12"></polyline>      </svg>    
+                                        </span>                                        
+                                {% endif %}
+                            </td>
+                <td>{{ historique_commission.montant }}</td>
+                <td>{{ historique_commission.gainCommission }}</td>       
+                <td>{{ historique_commission.dateCreation|date("d/m/Y") }}</td>
+                {# <td>
+                    <a href="{{ path('app_historique_commission_edit', {'id': historique_commission.id}) }}" class="btn btn-sm btn-phoenix-primary me-1 mb-1"> Modifier</a> 
+                </td>
+            </tr> #}
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+     </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      {# {% if app.request.hasPreviousSession() and app.request.session.flashBag.has('detail_success') %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Succès !',
+                    text: 'Le dépôt a été effectué avec succès.',
+                    icon: 'success',
+                    confirmButtonColor: '#25b003',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    {% endif %}
+    {% if app.request.hasPreviousSession() and app.request.session.flashBag.has('retrait_success') %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Succès !',
+                    text: 'Le retrait a été effectué avec succès.',
+                    icon: 'success',
+                    confirmButtonColor: '#25b003',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    {% endif %}
+    {% if app.request.hasPreviousSession() and app.request.session.flashBag.has('depot_error') %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Dépôt Impossible',
+                  text: 'Le montant de dépôt est supérieur au solde de votre caisse !',
+                  confirmButtonColor: '#25b003',
+                  confirmButtonText: 'OK'
+                })
+            });
+        </script>
+    {% endif %} #}
+
+{% endblock %}

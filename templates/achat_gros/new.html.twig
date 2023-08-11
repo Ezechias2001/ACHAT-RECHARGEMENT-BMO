@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Achat en Gros{% endblock %}
+
+{% block body %}
+      {% include '__fragments/nav.html.twig' %}
+
+      {# contenu #}
+      <div class="content">
+        <div class="pb-5">
+          <div class="row g-4">
+            <div class="col-12 col-xxl-6">
+                <div class="mb-8">
+                    <h1>Enregistrer un achat en gros</h1>
+
+                    {{ include('achat_gros/_form.html.twig') }}
+
+                </div> 
+
+
+    <a href="{{ path('app_achat_gros_index') }}">Retour</a>
+{% endblock %}

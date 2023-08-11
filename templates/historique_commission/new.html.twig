@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New HistoriqueCommission{% endblock %}
+
+{% block body %}
+    <h1>Create new HistoriqueCommission</h1>
+
+    {{ include('historique_commission/_form.html.twig') }}
+
+    <a href="{{ path('app_historique_commission_index') }}">back to list</a>
+{% endblock %}

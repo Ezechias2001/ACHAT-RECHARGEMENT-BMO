@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Rechargement{% endblock %}
+
+{% block body %}
+      {% include '__fragments/nav.html.twig' %}
+
+      {# contenu #}
+      <div class="content">
+        <div class="pb-5">
+          <div class="row g-4">
+            <div class="col-12 col-xxl-6">
+                <div class="mb-8">
+                    <h1>Modifier ce Rechargement</h1>
+
+                    {{ include('rechargement/_form.html.twig', {'button_label': 'Modifier'}) }}
+                    {{ include('rechargement/_delete_form.html.twig') }}
+    
+                </div> 
+
+            <a href="{{ path('app_rechargement_index') }}">Retour</a>
+{% endblock %}

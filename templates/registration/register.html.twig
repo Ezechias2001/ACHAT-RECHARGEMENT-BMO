@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="container">
+        <div class="row flex-center min-vh-100 py-5">
+          <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4" href="../../../index.html">
+              <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block"><img src="../../../assets/img/icons/logo.png" alt="phoenix" width="58" /></div>
+            </a>
+            <div class="text-center mb-7">
+              <h3 class="text-1000">Inscription</h3>
+              <p class="text-700">Créer un compte en un clic</p>
+
+            {{ form_errors(registrationForm) }}
+            {{ form_start(registrationForm) }}
+
+              <div class="mb-3 text-start">
+                <label class="form-label" for="name">Nom Complet</label>
+                {{ form_row(registrationForm.nom) }}
+              </div>
+              <div class="mb-3 text-start">
+                <label class="form-label" for="email">Email </label>
+                {{ form_row(registrationForm.email) }}
+              </div>
+              <div class="row g-3 mb-3">
+                <div class="col-sm-6">
+                  <label class="form-label" for="password">Mot de passe</label>
+                  {{ form_row(registrationForm.plainPassword.first) }}
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label" for="confirmPassword">Confirmer Mot de passe</label>
+                  {{ form_row(registrationForm.plainPassword.second) }}
+                </div>
+              </div>
+              <div class="form-check mb-3">
+                {{ form_row(registrationForm.agreeTerms) }}
+                <label class="form-label fs--1 text-none" for="termsService">J'accepte les <a class="text-success" href="#!">termes </a>et <a class="text-success" href="#!">les conditions d'utilisations</a></label>
+              </div>
+              <button type="submit" class="btn w-100 mb-3 btn-success">Créer le compte</button>
+              <div class="text-center">
+                <a class="fs--1 fw-bold" href=" {{ path('app_login') }} ">Se connecter avec un compte existant</a>
+              </div>
+            
+            {{ form_end(registrationForm) }}
+          </div>
+        </div>
+      </div>
+    </main><!-- ===============================================-->
+    <!--    End of Main Content-->
+    
+{% endblock %}

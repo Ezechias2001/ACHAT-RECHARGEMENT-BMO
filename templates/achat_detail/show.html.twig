@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AchatDetail{% endblock %}
+
+{% block body %}
+    <h1>AchatDetail</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ achat_detail.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ achat_detail.nom }}</td>
+            </tr>
+            <tr>
+                <th>DateNaissance</th>
+                <td>{{ achat_detail.dateNaissance }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ achat_detail.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Piece</th>
+                <td>{{ achat_detail.piece }}</td>
+            </tr>
+            <tr>
+                <th>NumeroPiece</th>
+                <td>{{ achat_detail.numeroPiece }}</td>
+            </tr>
+            <tr>
+                <th>ImagePiece</th>
+                <td> <img src="{{ asset(achat_detail.imagePiece) }}"  style="height: 70px;width: 107px;"> </td>
+
+            </tr>
+            <tr>
+                <th>TypeCarte</th>
+                <td>{{ achat_detail.typeCarte }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ achat_detail.dateCreation }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ achat_detail.montant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_achat_detail_index') }}">back to list</a>
+
+    <a href="{{ path('app_achat_detail_edit', {'id': achat_detail.id}) }}">edit</a>
+
+    {{ include('achat_detail/_delete_form.html.twig') }}
+{% endblock %}

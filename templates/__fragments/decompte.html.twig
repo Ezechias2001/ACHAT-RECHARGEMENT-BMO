@@ -1,0 +1,18 @@
+{# <div class="pb-2">
+          <div class="px-3 mb-2">
+            <div class="row justify-content-between">
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end border-bottom pb-4 pb-xxl-0 "><span class="uil fs-3 lh-1 uil-archway text-info"></span>
+                <h1 class="fs-3 pt-3"> {#{{ solde|number_format(3, '.', ',')|trim('0', 'right')|slice(0, -1) }} #} </h1>
+                <p class="fs--1 mb-0">Caisse</p>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end-md border-bottom pb-4 pb-xxl-0"><span class="uil fs-3 lh-1 uil-chart-down text-success"></span>
+                <h1 class="fs-3 pt-3"> {#{{ depot|number_format(3, '.', ',')|trim('0', 'right')|slice(0, -1) }}#}  </h1>
+                <p class="fs--1 mb-0">Dépôt</p>
+              </div>
+              <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-bottom-xxl-0 border-bottom border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0"><span class="uil fs-3 lh-1 uil-arrow-growth text-danger"></span>
+                <h1 class="fs-3 pt-3"> {#{{ retrait|number_format(3, '.', ',')|trim('0', 'right')|slice(0, -1) }}#}  </h1>
+                <p class="fs--1 mb-0">Retrait</p>
+              </div>
+            </div>
+          </div>
+ </div> #}

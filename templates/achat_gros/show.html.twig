@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AchatGros{% endblock %}
+
+{% block body %}
+    <h1>AchatGros</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ achat_gro.id }}</td>
+            </tr>
+            <tr>
+                <th>NomService</th>
+                <td>{{ achat_gro.NomService }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ achat_gro.Nombre }}</td>
+            </tr>
+            <tr>
+                <th>TypeCarte</th>
+                <td>{{ achat_gro.typeCarte }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ achat_gro.montant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_achat_gros_index') }}">back to list</a>
+
+    <a href="{{ path('app_achat_gros_edit', {'id': achat_gro.id}) }}">edit</a>
+
+    {{ include('achat_gros/_delete_form.html.twig') }}
+{% endblock %}

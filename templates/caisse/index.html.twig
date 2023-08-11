@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Caisse{% endblock %}
+
+{% block body %}
+      {% include '__fragments/nav.html.twig' %}
+
+      <div class="content">
+        <div class="mb-9">
+          <div class="row g-3 mb-4">
+            <div class="col-auto">
+              <h2 class="mb-0">Caisse</h2>
+            </div>
+          </div>
+          <div class="pb-2">
+            <div class="px-3 mb-2">
+                <div class="row justify-content-between">
+                <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end border-bottom pb-4 pb-xxl-0 "><span class="uil fs-3 lh-1 uil-archway text-info"></span>
+                    <h1 class="fs-3 pt-3">{{ solde|number_format(3, '.', ',')|trim('0', 'right')|slice(0, -1) }} </h1>
+                    <p class="fs--1 mb-0">Caisse</p>
+                </div>
+                <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-end-xxl-0 border-bottom-xxl-0 border-end-md border-bottom pb-4 pb-xxl-0"><span class="uil fs-3 lh-1 uil-wallet text-success"></span>
+                    <h1 class="fs-3 pt-3"> <a href=" {{path('app_caisse_depot')}} " class="btn btn-outline-success btn-lg me-1 mb-1"> <span class="uil uil-money-withdraw m-2"></span>  Effectuer un dépôt</a> </h1> 
+                </div>
+                <div class="col-6 col-md-4 col-xxl-2 text-center border-start-xxl border-bottom-xxl-0 border-bottom border-end border-end-md-0 pb-4 pb-xxl-0 pt-4 pt-md-0"><span class="uil fs-3 lh-1 uil-briefcase text-danger"></span>
+                    <h1 class="fs-3 pt-3"> <a href=" {{path('app_caisse_retrait')}} " class="btn btn-outline-danger btn-lg me-1 mb-1"> <span class="uil uil-money-insert m-2"></span>  Effectuer un retrait</a> </h1> 
+                </div>
+                </div>
+            </div>
+          </div>
+          
+          <h2 class="mb-3 mt-5">Historique des dépôts et retraits de la caisse</h2>
+            <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
+              <div class="table-responsive scrollbar mx-n1 px-1">
+                <table  id="myTable" class="table table-sm fs--1 mb-0">
+                  <thead>
+                    <tr>
+                      <th class="white-space-nowrap fs--1 align-middle ps-0" style="width:26px;">
+                        <div class="form-check mb-0 fs-0"><input class="form-check-input" id="checkbox-bulk-order-select" type="checkbox" data-bulk-select='{"body":"order-table-body"}' /></div>
+                      </th>
+                      <th class="sort white-space-nowrap align-middle pe-3" scope="col" data-sort="order" style="width:6%;">N°</th>
+                      <th class="sort align-middle pe-3" scope="col" data-sort="payment_status" style="width:10%;">MONTANT</th>
+                      <th class="sort align-middle text-start pe-3" scope="col" data-sort="fulfilment_status" style="width:3%; min-width: 50px;">TYPE</th>
+                      <th class="sort align-middle pe-0" scope="col" data-sort="date">DATE</th>
+                      {# <th class="sort align-middle text-start" scope="col" data-sort="delivery_type" style="width:30%;">ACTION</th> #}
+                    </tr>
+                  </thead>
+                  <tbody class="list" id="order-table-body">
+                    {% for historique in historiques %}
+                    {% set i = loop.index %}
+                      <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                        <td class="fs--1 align-middle px-0 py-3">
+                          <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox" data-bulk-select-row='{"order":2453,"total":87,"customer":{"avatar":"/team/32.webp","name":"Carry Anna"},"payment_status":{"label":"Complete","type":"badge-phoenix-success","icon":"check"},"fulfilment_status":{"label":"Cancelled","type":"badge-phoenix-secondary","icon":"x"},"delivery_type":"Cash on delivery","date":"Dec 12, 12:56 PM"}' /></div>
+                        </td> 
+                        <td class="order align-middle white-space-nowrap py-0"><a class="fw-semi-bold" href="#!">#{{i}} </a></td>
+                        <td class="total align-middle fw-semi-bold text-1000">{{ historique.montant }}</td>
+                        <td class="payment_status align-middle white-space-nowrap text-start fw-bold text-700">
+                                          {% if historique.type == 'Retrait' %}
+                                            <span class="badge badge-phoenix fs--2 badge-phoenix-danger">
+                                              <span class="badge-label">{{ historique.type }}</span>
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info ms-1" style="height:12.8px;width:12.8px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                              </svg>
+                                            </span>
+                                          {% elseif historique.type == 'Dépôt' %}
+                                              <span class="badge badge-phoenix fs--2 badge-phoenix-success">
+                                                <span class="badge-label">{{ historique.type }}</span>
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check ms-1" style="height:12.8px;width:12.8px;"><polyline points="20 6 9 17 4 12"></polyline>
+                                                  </svg>
+                                                </span>
+                                          {% else %}
+                                              {{ historique.type }}
+                                          {% endif %}
+                        </td>
+                        <td class="date align-middle white-space-nowrap text-700 fs--1 ps-4">{{ historique.date}}</td>
+                        {# <td class="fulfilment_status align-middle white-space-nowrap text-start fw-bold text-700"> 
+                           <a href="{{ path('app_historique_edit', {'id': historique.id}) }}" class="btn btn-sm btn-phoenix-primary me-1 mb-1"> Modifier</a> 
+                        </td> #}
+                      </tr>
+                    {% else %}
+                      <tr>
+                        <td colspan="7">no records found</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    
+    {# {% if depotSuccess %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Le dépôt a été effectué avec succès.',
+                showConfirmButton: false,
+                timer: 2500
+              })
+            });
+        </script>
+    {% endif %}
+    {% if retraitSuccess %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Succès !',
+                    text: 'Le retrait a été effectué avec succès.',
+                    icon: 'success',
+                    confirmButtonColor: '#25b003',
+                    confirmButtonText: 'OK'
+                });
+            });
+        </script>
+    {% endif %}
+    {% if retraitError %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Ooups...',
+                  text: 'Le montant de retrait est supérieur au solde de votre caisse !'
+                })
+            });
+        </script>
+    {% endif %} #}
+
+{% endblock %}
